@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+
+development:
+  <<: *default
+  database: paymail_development
+
+test:
+  <<: *default
+  database: paymailk_test
+
+production:
+  <<: *default
+  database: paymail_production
