@@ -5,30 +5,30 @@ class PaySlipMailer < ApplicationMailer
   #
   #   en.pay_slip_mailer.monthly.subject
   #
-  def monthly
-    pdf = Prawn::Document.new
-    pdf.text "Dear Irfan,"
-    pdf.move_down 20
-    pdf.text "Your salary for the month of January has been transferred to the bank account that you shared"
-    pdf.text "with us at the time of joining. The amount of 7,500 INR should be credited to your"
-    pdf.text "account before the end of the day. Incase you do not get the money credited today send an email to hsps@redpanthers.co."
+  def monthly employee, pay_slip
+    pdf_template = Liquid::Template.parse(CommonSetting.first.pdf_template).render('name' => employee.name,
+                    'month' => pay_slip.month, 'salary' => pay_slip.salary, 'no_of_leaves' => pay_slip.no_of_leaves,
+                    'bank_account' => employee.bank_account_number, 'bank_name' => employee.bank_name)
+    pdf = Prawn::Document.new do
+      move_down(100)
+      text pdf_template
+      bounding_box [bounds.left, bounds.bottom + 25], :width  => bounds.width do
+        stroke_horizontal_rule
+        move_down(5)
+        text "Red Panthers Software Solutions (P) Ltd.", :size => 10
+      end
+    end
 
-    pdf.move_down 10
-    pdf.text "We appreciate all the effort and work you have put into the company for the past one month"
-
-    pdf.move_down 10
-    pdf.text "regards,"
-    pdf.move_down 10
-    pdf.text "Harisankar P. S.
-              Founder and C.E.O,
-              Red Panthers Software Solutions,"
-    
     pdf.encrypt_document(
-      :user_password  => 'user', 
-      :owner_password => "test")
+      :user_password  => employee.name, 
+      :owner_password => employee.pancard)
 
+    @template = Liquid::Template.parse(CommonSetting.first.email_template).render('name' => employee.name,
+                    'month' => pay_slip.month)
 
-    attachments["payslip_#{Time.now.strftime("%v")}.pdf"] = { :mime_type => 'application/pdf', :content => pdf.render }
-    mail(:to => "HsPS<hsps@coderhs.com>", :subject => "Salary for the month of #{Time.now.strftime("%B, %Y")}")
+    attachments["payslip_#{pay_slip.month}-#{pay_slip.year}.pdf"] = { :mime_type => 'application/pdf', :content => pdf.render }
+    pay_slip.total_emails_send = pay_slip.total_emails_send + 1 rescue pay_slip.total_emails_send = 1
+    pay_slip.save
+    mail(:to => "#{employee.name}<#{employee.email_address}>", :subject => "Salary for the month of #{pay_slip.month}, #{pay_slip.year}")
   end
 end

@@ -2,7 +2,7 @@ ActiveAdmin.register PaySlip do
 
   scope :all, default: true
 
-  permit_params :employee_id, :salary, :no_of_leaves, :send_email, :month
+  permit_params :employee_id, :salary, :no_of_leaves, :send_email, :month, :year
 
   index do
     column :employee_id
@@ -11,6 +11,7 @@ ActiveAdmin.register PaySlip do
     column :send_email
     column :total_emails_send
     column :month
+    column :year
 
     actions
   end
@@ -24,6 +25,7 @@ ActiveAdmin.register PaySlip do
       f.input :send_email
       f.input :month, as: :select, collection: Date::MONTHNAMES, default: Date::MONTHNAMES[Date.today.month].next,
               include_blank: false, allow_blank: false, label: 'Pay Slip for the month of'
+      f.input :year, as: :select, collection: ['2015', '2016', '2017']
       actions
     end 
   end
