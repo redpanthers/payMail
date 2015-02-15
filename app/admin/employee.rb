@@ -5,7 +5,7 @@ ActiveAdmin.register Employee do
   filter :name
 
   permit_params :name, :date_of_joining, :date_of_birth, :bank_name, :bank_account_number,
-                :bank_ifsc_code, :bank_branch_name, :pancard
+                :bank_ifsc_code, :bank_branch_name, :pancard, :email_address
 
   index do
     column :name
@@ -19,7 +19,7 @@ ActiveAdmin.register Employee do
   end
 
   show do
-    attributes_table :name, :date_of_birth, :date_of_joining, :pancard, :bank_name,
+    attributes_table :name, :email_address, :date_of_birth, :date_of_joining, :pancard, :bank_name,
                      :bank_ifsc_code, :bank_branch_name, :bank_account_number,
                      :address
     active_admin_comments
