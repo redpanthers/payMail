@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209145719) do
+ActiveRecord::Schema.define(version: 20150215045817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,5 +48,41 @@ ActiveRecord::Schema.define(version: 20150209145719) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "common_settings", force: :cascade do |t|
+    t.string   "cc_address"
+    t.string   "bcc_address"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "date_of_birth"
+    t.datetime "date_of_joining"
+    t.string   "encrypted_pancard"
+    t.string   "encrypted_bank_account_number"
+    t.string   "encrypted_bank_name"
+    t.string   "encrypted_bank_ifsc_code"
+    t.string   "encrypted_bank_branch_name"
+    t.text     "address"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "email_address"
+  end
+
+  create_table "pay_slips", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.integer  "admin_user_id"
+    t.boolean  "send_email"
+    t.integer  "total_emails_send"
+    t.datetime "last_email_send_at"
+    t.integer  "salary"
+    t.integer  "no_of_leaves"
+    t.integer  "total_working_days"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "month"
+  end
 
 end

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cc_address: MyString
+  bcc_address: MyString
+
+two:
+  cc_address: MyString
+  bcc_address: MyString
