@@ -29,6 +29,7 @@ class PaySlipMailer < ApplicationMailer
     attachments["payslip_#{pay_slip.month}-#{pay_slip.year}.pdf"] = { :mime_type => 'application/pdf', :content => pdf.render }
     pay_slip.total_emails_send = pay_slip.total_emails_send + 1 rescue pay_slip.total_emails_send = 1
     pay_slip.save
-    mail(:to => "#{employee.name}<#{employee.email_address}>", :subject => "Salary for the month of #{pay_slip.month}, #{pay_slip.year}")
+    mail(:to => "#{employee.name}<#{employee.email_address}>", :cc => CommonSetting.first.cc_address,
+         :bcc => CommonSetting.first.bcc_address, :subject => "Salary for the month of #{pay_slip.month}, #{pay_slip.year}")
   end
 end
