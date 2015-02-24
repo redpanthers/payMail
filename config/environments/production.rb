@@ -48,6 +48,19 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
+  # Action Mailer
+  ActionMailer::Base.delivery_method = :smtp  
+  ActionMailer::Base.smtp_settings = {            
+    :address              => "smtp.zoho.com", 
+    :port                 => 465,                 
+    :user_name            => ENV['EMAIL'],
+    :password             => ENV['PASSWORD'],         
+    :authentication       => :login,
+    :ssl                  => true,
+    :tls                  => true,
+    :enable_starttls_auto => true    
+  }
+
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
