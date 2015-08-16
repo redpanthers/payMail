@@ -8,7 +8,8 @@ class PaySlipMailer < ApplicationMailer
   def monthly employee, pay_slip
     pdf_template = Liquid::Template.parse(CommonSetting.first.pdf_template).render('name' => employee.name,
                     'month' => pay_slip.month, 'salary' => pay_slip.salary, 'no_of_leaves' => pay_slip.no_of_leaves,
-                    'bank_account' => employee.bank_account_number, 'bank_name' => employee.bank_name)
+                    'bank_account' => employee.bank_account_number, 'bank_name' => employee.bank_name,
+                    'year' => pay_slip.year)
     pdf = Prawn::Document.new do
       move_down(100)
       text pdf_template
