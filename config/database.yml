@@ -10,8 +10,8 @@ development:
 
 test:
   <<: *default
-  database: paymailk_test
+  database: paymail_test
 
 production:
   <<: *default
-  database: paymail_production
+  database: paymail_development
