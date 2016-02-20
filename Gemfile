@@ -32,7 +32,6 @@ group :development, :test do
   gem 'letter_opener'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'shoulda-matchers', '~> 3.0'
   gem "shoulda-kept-respond-with-content-type"
   gem 'web-console', '~> 2.0'
 
