@@ -18,6 +18,7 @@ RSpec.describe Employee do
 
   describe 'Associations' do
     it { is_expected.to have_many(:pay_slips) }
+    it { is_expected.to belong_to(:department) }
   end
 
 

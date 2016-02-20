@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20160220050432) do
+ActiveRecord::Schema.define(version: 20160220061125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +82,7 @@ ActiveRecord::Schema.define(version: 20160220050432) do
     t.string   "pf_account"
     t.string   "esi_account"
     t.string   "fathers_name"
+    t.integer  "department_id"
   end
 
   create_table "pay_slips", force: :cascade do |t|

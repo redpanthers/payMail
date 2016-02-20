@@ -10,4 +10,5 @@ class Employee < ActiveRecord::Base
   validates :pancard, format: { with: /[A-Z]{5}[0-9]{4}[A-Z]/, message: 'Invalid Format' }
 
   has_many :pay_slips
+  belongs_to :department
 end

@@ -17,5 +17,7 @@ FactoryGirl.define do
     pf_account Faker::Number.number(16)
     esi_account Faker::Number.number(16)
     fathers_name Faker::Name.name
+
+    department
   end
 end
