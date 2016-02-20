@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220061125) do
+ActiveRecord::Schema.define(version: 20160220071939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,10 +94,17 @@ ActiveRecord::Schema.define(version: 20160220061125) do
     t.integer  "salary"
     t.integer  "no_of_leaves"
     t.integer  "total_working_days"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "month"
     t.string   "year"
+    t.float    "basic_pay"
+    t.float    "dearness_allowance"
+    t.float    "house_rent"
+    t.float    "conveyance"
+    t.float    "monthly_tax_deduction"
+    t.float    "loss_of_pay"
+    t.float    "total_gross_salary"
   end
 
 end
