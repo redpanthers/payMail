@@ -37,11 +37,12 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 
   gem 'spring'
-
+  gem 'faker'
   gem 'rspec-rails', '~> 3.0'
 end
 
 group :test do
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 

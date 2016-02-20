@@ -1,9 +1,25 @@
 require 'rails_helper'
- 
+
 RSpec.describe Employee do
   before do
     @employee = FactoryGirl.create(:employee)
   end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:bank_ifsc_code) }
+    it { should validate_presence_of(:bank_name) }
+    it { should validate_presence_of(:bank_branch_name) }
+    it { should validate_presence_of(:bank_account_number) }
+    it { should validate_presence_of(:employee_id) }
+    it { should validate_presence_of(:designation) }
+    it { should validate_presence_of(:fathers_name) }
+  end
+
+  describe 'Associations' do
+    it { is_expected.to have_many(:pay_slips) }
+  end
+
 
   describe 'PanCard' do
     it 'should not accept pancard with only alphabets' do
