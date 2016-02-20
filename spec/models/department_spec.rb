@@ -9,4 +9,8 @@ describe Department, type: :model do
       expect(department).to be_invalid
     end
   end
+  describe 'Associations' do
+    it { is_expected.to have_many(:employees) }
+  end
+
 end
