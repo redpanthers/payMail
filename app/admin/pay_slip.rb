@@ -26,7 +26,8 @@ ActiveAdmin.register PaySlip do
       f.input :month, as: :select, collection: Date::MONTHNAMES, default: Date::MONTHNAMES[Date.today.month].next,
               include_blank: false, allow_blank: false, label: 'Pay Slip for the month of'
       f.input :year, as: :select, collection: ['2015', '2016', '2017']
+      f.input :id, as: :hidden, :value => PaySlip.find_by_id(params[:id])
       actions
-    end 
+    end
   end
 end

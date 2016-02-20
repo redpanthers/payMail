@@ -25,7 +25,7 @@ ActiveAdmin.register Employee do
     active_admin_comments
   end
 
-  form :html => { :enctype => "multipart/form-data" } do |f|  
+  form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "employee" do
       f.input :name
       f.input :email_address
@@ -37,6 +37,7 @@ ActiveAdmin.register Employee do
       f.input :bank_ifsc_code
       f.input :bank_branch_name
       f.input :address
+      f.input :id, as: :hidden, :value => Employee.find_by_id(params[:id])
     end
     actions
   end
