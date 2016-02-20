@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.0'
-ruby '2.1.5'
+ruby '2.3.0'
 
 gem 'pg'
 
@@ -30,7 +30,10 @@ gem 'rails_12factor', group: :production
 group :development, :test do
   gem 'byebug'
   gem 'letter_opener'
-
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'shoulda-matchers', '~> 3.0'
+  gem "shoulda-kept-respond-with-content-type"
   gem 'web-console', '~> 2.0'
 
   gem 'spring'
