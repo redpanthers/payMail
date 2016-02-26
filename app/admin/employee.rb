@@ -27,10 +27,21 @@ ActiveAdmin.register Employee do
     active_admin_comments
   end
 
+  controller do
+    def new
+      if Department.count.zero?
+        flash[:notice] = "Please create atleast one department"
+        redirect_to '/' and return
+      else
+        super
+      end
+    end
+  end
+
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "employee" do
       f.input :name
-      f.input :employee_id
+      f.input :department_id, as: :select, collection: Department.all.map{ |d| [d.name, d.id] }, include_blank: false, allow_blank: false
       f.input :fathers_name
       f.input :email_address
       f.input :date_of_birth, :as => :datepicker
