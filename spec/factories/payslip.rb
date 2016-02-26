@@ -10,7 +10,5 @@ FactoryGirl.define do
     total_working_days nil
     month 'January'
     year '2015'
-
-    employee
   end
 end
