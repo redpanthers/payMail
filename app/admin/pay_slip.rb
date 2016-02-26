@@ -2,8 +2,12 @@ ActiveAdmin.register PaySlip do
 
   scope :all, default: true
 
-  permit_params :employee_id, :salary, :no_of_leaves, :send_email, :month, :year, :basic_pay, :dearness_allowance, :house_rent, :conveyance,
-                            :monthly_tax_deduction, :loss_of_pay, :total_gross_salary
+  permit_params :employee_id, :salary, :no_of_leaves, :send_email, :month,
+                :year, :basic_pay, :dearness_allowance, :house_rent,
+                :conveyance, :monthly_tax_deduction, :loss_of_pay,
+                :total_gross_salary
+
+  actions :index, :show, :new, :create, :destroy
 
   index do
     column :employee_id
@@ -37,6 +41,17 @@ ActiveAdmin.register PaySlip do
       f.input :loss_of_pay
       f.input :total_gross_salary
       actions
+    end
+  end
+
+  controller do
+    def new
+      if CommonSetting.count.zero?
+        flash[:notice] = "Please create a CommonSetting that is needed for sending emails"
+        redirect_to '/' and return
+      else
+        super
+      end
     end
   end
 end
