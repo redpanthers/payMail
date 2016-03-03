@@ -13,5 +13,4 @@ test:
   database: paymail_test
 
 production:
-  <<: *default
-  database: paymail_development
+  url: <%= ENV['DATABASE_URL'] %>
