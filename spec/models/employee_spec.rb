@@ -11,7 +11,6 @@ RSpec.describe Employee do
     it { should validate_presence_of(:bank_name) }
     it { should validate_presence_of(:bank_branch_name) }
     it { should validate_presence_of(:bank_account_number) }
-    it { should validate_presence_of(:employee_id) }
     it { should validate_presence_of(:designation) }
     it { should validate_presence_of(:fathers_name) }
   end

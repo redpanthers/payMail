@@ -12,7 +12,6 @@ FactoryGirl.define do
     bank_branch_name Faker::Team.state
     address Faker::Bitcoin.address
     email_address Faker::Internet.email
-    employee_id Faker::Number.number(7)
     designation Faker::Company.profession
     pf_account Faker::Number.number(16)
     esi_account Faker::Number.number(16)
