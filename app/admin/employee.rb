@@ -5,7 +5,9 @@ ActiveAdmin.register Employee do
   filter :name
 
   permit_params :name, :date_of_joining, :date_of_birth, :bank_name, :bank_account_number,
-                :bank_ifsc_code, :bank_branch_name, :pancard, :email_address, :employee_id, :designation, :fathers_name, :pf_account, :esi_account
+                :bank_ifsc_code, :bank_branch_name, :pancard, :email_address,
+                :employee_id, :designation, :fathers_name, :pf_account,
+                :esi_account, :department_id
 
   index do
     column :name
