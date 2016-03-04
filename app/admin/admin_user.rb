@@ -21,6 +21,7 @@ ActiveAdmin.register AdminUser do
       f.input :email
       f.input :password
       f.input :password_confirmation
+      f.input :id, as: :hidden, :value => AdminUser.find_by_id(params[:id])
     end
     f.actions
   end

@@ -5,7 +5,9 @@ ActiveAdmin.register Employee do
   filter :name
 
   permit_params :name, :date_of_joining, :date_of_birth, :bank_name, :bank_account_number,
-                :bank_ifsc_code, :bank_branch_name, :pancard, :email_address
+                :bank_ifsc_code, :bank_branch_name, :pancard, :email_address,
+                :employee_id, :designation, :fathers_name, :pf_account,
+                :esi_account, :department_id
 
   index do
     column :name
@@ -19,24 +21,43 @@ ActiveAdmin.register Employee do
   end
 
   show do
-    attributes_table :name, :email_address, :date_of_birth, :date_of_joining, :pancard, :bank_name,
-                     :bank_ifsc_code, :bank_branch_name, :bank_account_number,
+    attributes_table :name,:employee_id, :email_address, :fathers_name, :date_of_birth,
+                     :date_of_joining, :pancard, :designation,
+                     :bank_name, :bank_ifsc_code, :bank_branch_name, :bank_account_number,
+                     :pf_account, :esi_account
                      :address
     active_admin_comments
   end
 
-  form :html => { :enctype => "multipart/form-data" } do |f|  
+  controller do
+    def new
+      if Department.count.zero?
+        flash[:notice] = "Please create atleast one department"
+        redirect_to '/' and return
+      else
+        super
+      end
+    end
+  end
+
+  form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "employee" do
       f.input :name
+      f.input :department_id, as: :select, collection: Department.all.map{ |d| [d.name, d.id] }, include_blank: false, allow_blank: false
+      f.input :fathers_name
       f.input :email_address
       f.input :date_of_birth, :as => :datepicker
       f.input :date_of_joining, :as => :datepicker
       f.input :pancard
+      f.input :designation
       f.input :bank_name
       f.input :bank_account_number
       f.input :bank_ifsc_code
       f.input :bank_branch_name
+      f.input :pf_account
+      f.input :esi_account
       f.input :address
+      f.input :id, as: :hidden, :value => Employee.find_by_id(params[:id])
     end
     actions
   end

@@ -49,16 +49,14 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Action Mailer
-  ActionMailer::Base.delivery_method = :smtp  
-  ActionMailer::Base.smtp_settings = {            
-    :address              => "smtp.zoho.com", 
-    :port                 => 465,                 
-    :user_name            => ENV['EMAIL'],
-    :password             => ENV['PASSWORD'],         
-    :authentication       => :login,
-    :ssl                  => true,
-    :tls                  => true,
-    :enable_starttls_auto => true    
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    user_name: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
   }
 
   # Prepend all log lines with the following tags.
